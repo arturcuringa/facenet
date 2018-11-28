@@ -41,7 +41,6 @@ def _chinese_whispers(encoding_list, threshold=0.55, iterations=20):
         sorted_clusters: a list of clusters, a cluster being a list of imagepaths,
             sorted by largest cluster to smallest
     """
-
     #from face_recognition.api import _face_distance
     from random import shuffle
     import networkx as nx
@@ -54,7 +53,6 @@ def _chinese_whispers(encoding_list, threshold=0.55, iterations=20):
     if len(encodings) <= 1:
         print ("No enough encodings to cluster!")
         return []
-
     for idx, face_encoding_to_check in enumerate(encodings):
         # Adding node of facial encoding
         node_id = idx+1
@@ -70,7 +68,7 @@ def _chinese_whispers(encoding_list, threshold=0.55, iterations=20):
 
         compare_encodings = encodings[idx+1:]
         distances = face_distance(compare_encodings, face_encoding_to_check)
-        print(type(distances))
+        print(distances)
         encoding_edges = []
         for i, distance in enumerate(distances):
             if distance > threshold:
@@ -86,7 +84,7 @@ def _chinese_whispers(encoding_list, threshold=0.55, iterations=20):
 
     # Iterate
     for _ in range(0, iterations):
-        cluster_nodes = G.nodes()
+        cluster_nodes = list(G.nodes())
         shuffle(cluster_nodes)
         for node in cluster_nodes:
             neighbors = G[node]
