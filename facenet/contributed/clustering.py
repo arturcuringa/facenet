@@ -70,7 +70,7 @@ def _chinese_whispers(encoding_list, threshold=0.55, iterations=20):
 
         compare_encodings = encodings[idx+1:]
         distances = face_distance(compare_encodings, face_encoding_to_check)
-        print(distances)
+        print(type(distances))
         encoding_edges = []
         for i, distance in enumerate(distances):
             if distance > threshold:
